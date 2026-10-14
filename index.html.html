@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lensa Rental — Sewa Kamera</title>
+<style>
+:root{--blue:#14275e;--navy:#0f1b3d;--bg:#fff;--card:#fff;--text:#14213d;--muted:#6b7590;--line:#c9d1e6;--soft:#eef2fb;--ok:#2e8b57;--wa:#0f3b22;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',system-ui,-apple-system,Arial,sans-serif;line-height:1.45}
+button{font:inherit;color:inherit;cursor:pointer}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.nav{display:flex;justify-content:space-between;align-items:center;height:58px}
+.logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px;cursor:pointer}
+.logo i{width:12px;height:12px;border-radius:50%;background:var(--blue)}
+.menub{background:none;border:0;font-weight:500;display:flex;gap:10px;align-items:center;color:var(--muted)}
+.menu{display:none;position:absolute;right:20px;top:56px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px;min-width:170px;box-shadow:0 10px 24px rgba(15,27,61,.12)}
+.menu.on{display:block}
+.menu button{display:block;width:100%;background:none;border:0;text-align:left;padding:10px 12px;border-radius:8px}
+.menu button:hover{background:var(--soft)}
+h1{font-size:clamp(28px,5vw,40px);margin:30px 0 14px;letter-spacing:-.5px}
+.tabs{display:flex;gap:26px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.tabs button{background:none;border:0;padding:8px 2px;color:var(--muted);font-weight:600;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:var(--blue);border-color:var(--blue)}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.seg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;padding:10px 24px;font-weight:700}
+.seg button.on{background:var(--blue);color:#fff}
+.search{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:0 16px;background:var(--card);margin-bottom:14px}
+.search input{border:0;outline:0;background:none;font:inherit;color:var(--text);padding:14px 0;width:100%}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:8px 20px;border-radius:99px;font-weight:600;font-size:14px}
+.chip.on{color:var(--blue);border-color:var(--blue);background:var(--soft)}
+.chips.fill .chip.on{background:var(--blue);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-bottom:40px}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;gap:18px;padding:14px 18px;cursor:pointer;transition:.15s}
+.item:hover{box-shadow:0 8px 20px rgba(15,27,61,.1);transform:translateY(-2px)}
+.th{width:104px;height:84px;flex:none;display:flex;align-items:center;justify-content:center}
+.th svg,.th img{width:100%;height:100%;object-fit:contain}
+.im{flex:1;min-width:0}
+.im b{display:block;font-size:17px}
+.im span{color:var(--muted);font-size:14px}
+.pr{color:var(--muted);font-weight:500;white-space:nowrap}
+.pr b{color:var(--blue);font-size:19px}
+.acc .pr b{color:var(--text);font-size:16px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0}
+.sheet{max-width:520px;margin:26px auto 50px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.back{background:none;border:0;font-weight:600;color:var(--muted);padding:0}
+.hero{display:flex;gap:18px;align-items:center;margin:18px 0}
+.hero .th{width:200px;height:150px}
+.ok{color:var(--ok);font-weight:700}
+.ok:before{content:"";display:inline-block;width:10px;height:10px;background:var(--ok);border-radius:50%;margin-right:8px}
+.price{font-size:22px;font-weight:700;margin-top:6px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;text-align:center;font-size:13px;margin-bottom:16px}
+.specs div+div{border-left:1px solid var(--line)}
+.specs b{display:block;margin:2px 0}
+.specs span{color:var(--muted)}
+.lab{color:var(--blue);font-weight:800;font-size:14px;letter-spacing:.3px;margin:0 0 10px}
+.ck{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.ck input{display:none}
+.ck u{width:26px;height:26px;border:2px solid var(--muted);border-radius:6px;display:flex;align-items:center;justify-content:center;color:transparent;text-decoration:none;flex:none}
+.ck input:checked+u{background:var(--blue);border-color:var(--blue);color:#fff}
+.ck span{flex:1}
+.btn{width:100%;border:0;border-radius:12px;background:var(--navy);color:#fff;font-weight:700;padding:15px;margin-top:10px;font-size:16px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.wa{background:var(--wa)}
+h2{font-size:30px;margin:14px 0;letter-spacing:-.4px}
+.step{color:var(--muted);font-weight:600;font-size:14px}
+.cal{border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.cal .row{margin-bottom:12px}
+.cal .row button{background:none;border:0;font-size:24px;padding:0 10px}
+.cal .row b{font-size:17px}
+.dg{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;row-gap:4px}
+.dg small{color:var(--muted);font-weight:700;padding:6px 0}
+.dg button{background:none;border:0;padding:11px 0;font-weight:700;border-radius:10px}
+.dg button:disabled{color:var(--muted);opacity:.4;cursor:not-allowed}
+.dg .mid{background:var(--soft);border-radius:0}
+.dg .sel{background:var(--blue);color:#fff}
+.fld{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.box small{color:var(--muted);font-weight:600;display:block}
+.hint{color:var(--muted);font-size:14px;margin:10px 0 0}
+.f label{font-size:13px;font-weight:600;color:var(--muted);display:block;margin:12px 0 4px}
+.f input,.f textarea{width:100%;font:inherit;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.sum{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+.ln{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.ln .th{width:58px;height:58px;background:var(--soft);border-radius:10px}
+.ln div{flex:1}
+.ln small{color:var(--muted)}
+.tot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px}
+.tot b{font-size:26px}
+.err{color:#d64545;font-size:13px;min-height:18px;margin-top:6px}
+
+header{border-bottom:3px solid var(--navy)}
+.logo i{background:var(--navy)}
+.tabs{border-bottom:2px solid var(--navy)}
+.tabs button{margin-bottom:-2px}
+.tabs button.on{color:var(--navy);border-color:var(--navy)}
+.search{border:1.5px solid var(--navy)}
+.chip{border:1.5px solid var(--line)}
+.chip.on,.chips.fill .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.seg{border:1.5px solid var(--navy)}
+.seg button.on{background:var(--navy)}
+.item{border:1.5px solid var(--line);border-bottom:3px solid var(--navy)}
+.pr b,.lab{color:var(--navy)}
+.sheet{border:1.5px solid var(--navy)}
+.specs{border-top:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+.ck input:checked+u{background:var(--navy);border-color:var(--navy)}
+.cal{border:1.5px solid var(--line);border-top:3px solid var(--navy)}
+.dg .sel{background:var(--navy)}
+.box,.sum{border:1.5px solid var(--line)}
+.tot{border-top:2px solid var(--navy)}
+.f input:focus,.f textarea:focus{outline:2px solid var(--navy)}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><div class="logo" onclick="go('list')"><i></i>Lensa</div>
+<button class="menub" onclick="document.getElementById('mn').classList.toggle('on')">Menu <span style="font-size:22px">☰</span></button></div>
+<div class="menu" id="mn"><button onclick="tab('cam')">Katalog Kamera</button><button onclick="tab('acc')">Katalog Aksesoris</button></div></header>
+<main class="wrap" id="app"></main>
+
+<script>
+/* ===== PENGATURAN (diubah programmer) ===== */
+const WA_ADMIN="6281234567890"; // format 62xxxx tanpa +
+const A_MIR=[1,4,5,7,3,8],A_DSLR=[1,4,5,7,9,10],A_VLOG=[2,4,5,6,3],A_ACT=[2,4,5,10];
+const CAMERAS=[ // "img": path foto, mis. "foto/a7iii.png"; "acc": id aksesoris yang ditawarkan; "ready": false = sedang disewa
+ {id:1,name:"Sony A7 III",cat:"Mirrorless",price:100000,img:"",ready:true,sensor:"Full frame 24 MP",video:"4K 30p",incl:"2 baterai, charger",acc:A_MIR},
+ {id:2,name:"Sony A6400",cat:"Mirrorless",price:85000,img:"",ready:true,sensor:"APS-C 24 MP",video:"4K 30p",incl:"Baterai, charger",acc:A_MIR},
+ {id:3,name:"Canon EOS R50",cat:"Mirrorless",price:80000,img:"",ready:true,sensor:"APS-C 24 MP",video:"4K 30p",incl:"Baterai, charger",acc:A_MIR},
+ {id:4,name:"Fujifilm X-T4",cat:"Mirrorless",price:95000,img:"",ready:true,sensor:"APS-C 26 MP",video:"4K 60p",incl:"2 baterai, charger",acc:A_MIR},
+ {id:5,name:"Canon EOS 90D",cat:"DSLR",price:100000,img:"",ready:true,sensor:"APS-C 32.5 MP",video:"4K 30p",incl:"Baterai, charger",acc:A_DSLR},
+ {id:6,name:"Canon EOS 200D",cat:"DSLR",price:70000,img:"",ready:true,sensor:"APS-C 24 MP",video:"Full HD 60p",incl:"Lensa kit, charger",acc:A_DSLR},
+ {id:7,name:"Nikon D5600",cat:"DSLR",price:65000,img:"",ready:false,sensor:"APS-C 24 MP",video:"Full HD 60p",incl:"Lensa kit, charger",acc:A_DSLR},
+ {id:8,name:"Sony ZV-E10",cat:"Vlog cam",price:90000,img:"",ready:true,sensor:"APS-C 24 MP",video:"4K 30p",incl:"Baterai, charger",acc:A_VLOG},
+ {id:9,name:"GoPro Hero 12",cat:"Action cam",price:120000,img:"",ready:true,sensor:"1/1.9 inci",video:"5.3K 60p",incl:"Baterai, mount",acc:A_ACT},
+ {id:10,name:"DJI Osmo Action 4",cat:"Action cam",price:110000,img:"",ready:true,sensor:"1/1.3 inci",video:"4K 120p",incl:"Baterai, mount",acc:A_ACT}
+];
+const ACCS=[
+ {id:1,name:"Tripod Manfrotto 190",cat:"Tripod",price:30000,img:""},
+ {id:2,name:"Tripod mini Joby",cat:"Tripod",price:15000,img:""},
+ {id:3,name:"Gimbal DJI RS 3 Mini",cat:"Gimbal",price:90000,img:""},
+ {id:4,name:"SD card 64 GB V90",cat:"Memori",price:20000,img:""},
+ {id:5,name:"Baterai cadangan",cat:"Memori",price:15000,img:""},
+ {id:6,name:"Lampu LED Godox 60W",cat:"Lighting",price:50000,img:""},
+ {id:7,name:"Lensa 50 mm f/1.8",cat:"Lensa",price:70000,img:""},
+ {id:8,name:"Filter ND variabel 77 mm",cat:"Filter",price:25000,img:""},
+ {id:9,name:"Tas kamera Lowepro",cat:"Lainnya",price:15000,img:""},
+ {id:10,name:"Remote shutter wireless",cat:"Lainnya",price:10000,img:""}
+];
+/* ========================================= */
+const rp=n=>"Rp"+n.toLocaleString("id-ID"), rb=n=>n%1000?rp(n):(n/1000)+"rb";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const MON=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+const MONF=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const pad=n=>String(n).padStart(2,"0"), iso=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`, D=s=>new Date(s+"T00:00:00");
+const now=new Date(), today=iso(now.getFullYear(),now.getMonth(),now.getDate());
+const S={view:"list",tab:"cam",q:"",cat:"Semua",cam:null,acc:[],start:"",end:"",y:now.getFullYear(),m:now.getMonth(),nama:"",hp:"",note:""};
+
+let _g=0;
+function art(it,kind){
+ if(it.img)return `<img src="${esc(it.img)}" alt="${esc(it.name)}" loading="lazy">`;
+ const g="g"+(++_g),n=it.name,c=it.cat,B=`url(#${g}b)`,M=`url(#${g}m)`;
+ const defs=`<defs><linearGradient id="${g}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#555d72"/><stop offset=".5" stop-color="#262b38"/><stop offset="1" stop-color="#11141b"/></linearGradient><linearGradient id="${g}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a9b1c6"/><stop offset=".5" stop-color="#3a4052"/><stop offset="1" stop-color="#171a22"/></linearGradient><radialGradient id="${g}g"><stop offset="0" stop-color="#6f7dff"/><stop offset=".45" stop-color="#232a6b"/><stop offset="1" stop-color="#05060f"/></radialGradient><linearGradient id="${g}l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#ffe8b0"/></linearGradient></defs>`;
+ const lens=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*1.14}" fill="${M}"/><circle cx="${x}" cy="${y}" r="${r}" fill="#0b0d13"/><circle cx="${x}" cy="${y}" r="${r*.8}" fill="${M}"/><circle cx="${x}" cy="${y}" r="${r*.68}" fill="#0b0d13"/><circle cx="${x}" cy="${y}" r="${r*.58}" fill="url(#${g}g)"/><circle cx="${x}" cy="${y}" r="${r*.2}" fill="#04050a"/><ellipse cx="${x-r*.25}" cy="${y-r*.28}" rx="${r*.15}" ry="${r*.09}" fill="#fff" opacity=".75" transform="rotate(-35 ${x-r*.25} ${y-r*.28})"/>`;
+ const br=/Canon/.test(n)?"#d6202b":/Nikon/.test(n)?"#f2c200":/Fujifilm X/.test(n)?"#cfd3da":"#7f8aa6";
+ let s="";
+ if(kind==="cam"){
+  if(/Pocket/.test(n))s=`<rect x="58" y="34" width="44" height="72" rx="12" fill="${B}"/><rect x="64" y="52" width="32" height="40" rx="5" fill="#0a1a30" stroke="#3a4a6a"/><rect x="48" y="12" width="64" height="26" rx="12" fill="${B}"/>`+lens(80,25,9);
+  else if(/Insta360/.test(n))s=`<rect x="54" y="8" width="52" height="98" rx="14" fill="${B}"/>`+lens(80,34,14)+lens(80,80,14)+`<circle cx="80" cy="57" r="3" fill="#e53935"/>`;
+  else if(c==="Action cam")s=`<rect x="34" y="20" width="92" height="72" rx="10" fill="${B}"/><rect x="42" y="28" width="26" height="20" rx="3" fill="#0a1a30" stroke="#3a4a6a"/><circle cx="116" cy="30" r="3" fill="#e53935"/>`+lens(88,56,22)+`<rect x="58" y="92" width="44" height="8" rx="2" fill="#12151c"/><rect x="62" y="98" width="7" height="12" fill="#12151c"/><rect x="91" y="98" width="7" height="12" fill="#12151c"/>`;
+  else if(c==="Instan")s=`<rect x="24" y="28" width="112" height="74" rx="16" fill="#eef1f8" stroke="#aab4cf" stroke-width="2"/><rect x="100" y="36" width="24" height="12" rx="3" fill="#fff" stroke="#aab4cf"/><circle cx="46" cy="42" r="6" fill="#cdd5e8"/>`+lens(76,68,22);
+  else if(c==="Vlog cam")s=`<rect x="20" y="42" width="120" height="54" rx="12" fill="${B}"/><rect x="52" y="30" width="56" height="16" rx="8" fill="#1b1e26"/><path d="M58 34h44M58 38h44" stroke="#3a3f4e" stroke-width="1.5"/><circle cx="124" cy="52" r="3" fill="#e53935"/>`+lens(80,70,22);
+  else if(c==="DSLR")s=`<polygon points="50,40 60,14 100,14 110,40" fill="${B}"/><rect x="66" y="8" width="28" height="7" rx="2" fill="#8d95a8"/><rect x="12" y="38" width="136" height="68" rx="10" fill="${B}"/><rect x="12" y="38" width="34" height="68" rx="12" fill="#161922"/><rect x="118" y="48" width="18" height="5" rx="2" fill="${br}"/><rect x="116" y="26" width="18" height="12" rx="3" fill="#2a2f3b"/>`+lens(84,74,28);
+  else s=`<rect x="64" y="20" width="34" height="22" rx="5" fill="${B}"/><rect x="72" y="14" width="18" height="6" rx="2" fill="#8d95a8"/><rect x="14" y="38" width="132" height="62" rx="10" fill="${B}"/><rect x="14" y="38" width="32" height="62" rx="12" fill="#161922"/><rect x="104" y="28" width="16" height="12" rx="3" fill="#2a2f3b"/>${/Fujifilm X/.test(n)?`<rect x="14" y="38" width="132" height="14" rx="8" fill="#cfd3da"/>`:""}<rect x="122" y="56" width="14" height="4" rx="2" fill="${br}"/>`+lens(84,70,27);
+ }else if(c==="Tripod"){
+  if(/Monopod/.test(n))s=`<rect x="74" y="10" width="12" height="16" rx="4" fill="#161922"/><rect x="77" y="24" width="6" height="84" rx="3" fill="${M}"/><rect x="72" y="40" width="16" height="8" rx="2" fill="#161922"/>`;
+  else if(/Joby/.test(n))s=`<rect x="68" y="10" width="24" height="12" rx="4" fill="#161922"/><path d="M80 22V40M80 40C58 44 44 66 52 98M80 40V100M80 40C102 44 116 66 108 98" stroke="#2a2f3b" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="52" cy="100" r="5" fill="#e07b1f"/><circle cx="108" cy="100" r="5" fill="#e07b1f"/><circle cx="80" cy="102" r="5" fill="#e07b1f"/>`;
+  else s=`<rect x="64" y="8" width="32" height="14" rx="4" fill="#161922"/><rect x="76" y="20" width="8" height="34" rx="3" fill="${M}"/><path d="M80 50L44 108M80 50L116 108M80 50V110" stroke="#2a2f3b" stroke-width="6" stroke-linecap="round" fill="none"/><circle cx="80" cy="50" r="7" fill="#161922"/>`;
+ }else if(c==="Gimbal")s=`<rect x="72" y="60" width="16" height="48" rx="8" fill="${B}"/><rect x="76" y="72" width="8" height="8" rx="3" fill="#7f8aa6"/><rect x="77" y="26" width="6" height="36" fill="${M}"/><rect x="40" y="14" width="80" height="14" rx="7" fill="${M}"/><circle cx="80" cy="30" r="9" fill="${B}"/><rect x="58" y="4" width="44" height="12" rx="3" fill="#161922"/>`;
+ else if(c==="Lighting"){
+  if(/Ring/.test(n))s=`<circle cx="80" cy="46" r="34" fill="none" stroke="#161922" stroke-width="14"/><circle cx="80" cy="46" r="34" fill="none" stroke="#fff" stroke-width="8"/><path d="M80 80V110" stroke="#2a2f3b" stroke-width="5"/>`;
+  else if(/Softbox/.test(n))s=`<polygon points="30,70 130,70 112,18 48,18" fill="${B}"/><polygon points="38,66 122,66 108,24 52,24" fill="url(#${g}l)"/><rect x="74" y="70" width="12" height="40" fill="#2a2f3b"/>`;
+  else if(/stand/i.test(n))s=`<rect x="77" y="8" width="6" height="86" rx="2" fill="${M}"/><path d="M80 90L44 112M80 90L116 112M80 90V112" stroke="#2a2f3b" stroke-width="5" stroke-linecap="round" fill="none"/>`;
+  else s=`<rect x="22" y="12" width="116" height="66" rx="8" fill="${B}"/><rect x="30" y="20" width="100" height="50" rx="4" fill="url(#${g}l)"/><path d="M30 33h100M30 45h100M30 57h100" stroke="#e6c98a" stroke-width="1" opacity=".6"/><rect x="76" y="78" width="8" height="30" fill="#2a2f3b"/><rect x="58" y="106" width="44" height="5" rx="2" fill="#2a2f3b"/>`;
+ }else if(c==="Memori"){
+  if(/Charger/.test(n))s=`<rect x="34" y="30" width="38" height="44" rx="5" fill="#2a2f3b"/><rect x="88" y="30" width="38" height="44" rx="5" fill="#2a2f3b"/><rect x="20" y="66" width="120" height="36" rx="8" fill="${B}"/><circle cx="130" cy="94" r="3" fill="#2ecc71"/>`;
+  else if(/Baterai/.test(n))s=`<rect x="48" y="18" width="64" height="82" rx="9" fill="${B}"/><rect x="64" y="10" width="32" height="10" rx="2" fill="#d4af37"/><rect x="56" y="38" width="48" height="36" rx="4" fill="#e9edf6"/><path d="M80 44l-8 16h8l-4 12 12-18h-8l4-10z" fill="#0f1b3d"/>`;
+  else s=`<path d="M44 10H96L112 26V98Q112 104 106 104H48Q42 104 42 98V16Q42 10 48 10Z" fill="${B}"/><rect x="52" y="22" width="48" height="40" rx="3" fill="#e9edf6"/><text x="76" y="48" font-size="15" font-weight="800" text-anchor="middle" fill="#0f1b3d" font-family="Arial">${(n.match(/\d+ GB/)||["SD"])[0]}</text>`+[58,70,82,94].map(x=>`<rect x="${x}" y="72" width="8" height="26" fill="#d4af37"/>`).join("");
+ }else if(c==="Lensa"){
+  const L=/70-200/.test(n)?112:/24-70/.test(n)?88:60,x=80-L/2;
+  s=`<rect x="${x-8}" y="44" width="10" height="38" rx="3" fill="#161922"/><rect x="${x}" y="40" width="${L}" height="46" rx="6" fill="${B}"/><rect x="${x+L}" y="46" width="10" height="34" rx="2" fill="${M}"/><path d="M${x+14} 40v46M${x+22} 40v46M${x+L-30} 40v46M${x+L-22} 40v46" stroke="#6b7389" stroke-width="2"/>`;
+ }else if(c==="Audio"){
+  if(/Wireless/.test(n))s=`<rect x="40" y="30" width="34" height="60" rx="8" fill="${B}"/><rect x="86" y="30" width="34" height="60" rx="8" fill="${B}"/><circle cx="57" cy="44" r="4" fill="#2ecc71"/><circle cx="103" cy="44" r="4" fill="#2ecc71"/><rect x="48" y="58" width="18" height="12" rx="2" fill="#e9edf6"/><rect x="94" y="58" width="18" height="12" rx="2" fill="#e9edf6"/>`;
+  else if(/lavalier/.test(n))s=`<path d="M30 44C60 120 100 10 116 72" stroke="#161922" stroke-width="3" fill="none"/><circle cx="116" cy="78" r="8" fill="${B}"/><rect x="22" y="34" width="14" height="14" rx="3" fill="${B}"/>`;
+  else s=`<rect x="34" y="38" width="92" height="36" rx="18" fill="#2a2d36"/><path d="M44 42v28M54 40v32M64 39v34M74 39v34M84 39v34M94 40v32M104 42v28M114 46v20" stroke="#4a4f60" stroke-width="2"/><rect x="62" y="74" width="36" height="10" rx="2" fill="${B}"/><rect x="70" y="84" width="20" height="8" rx="2" fill="#8d95a8"/>`;
+ }else if(c==="Filter")s=`<circle cx="80" cy="58" r="40" fill="${M}"/><circle cx="80" cy="58" r="32" fill="#10131a"/><circle cx="80" cy="58" r="28" fill="${/CPL/.test(n)?"#5a6fd8":"#1b1d25"}"/><ellipse cx="68" cy="46" rx="10" ry="5" fill="#fff" opacity=".5" transform="rotate(-35 68 46)"/>`;
+ else if(/Tas/.test(n))s=`<rect x="30" y="38" width="100" height="62" rx="12" fill="${B}"/><path d="M30 60h100" stroke="#555d72" stroke-width="2"/><path d="M50 38V28Q50 18 62 18H98Q110 18 110 28V38" stroke="#161922" stroke-width="5" fill="none"/><rect x="72" y="56" width="16" height="12" rx="3" fill="#7f8aa6"/>`;
+ else if(/Reflector/.test(n))s=`<circle cx="80" cy="58" r="44" fill="#fff" stroke="#161922" stroke-width="4"/><path d="M80 14A44 44 0 0 1 124 58H80Z" fill="#d4af37"/><path d="M80 102A44 44 0 0 1 36 58H80Z" fill="#9aa3b8"/><path d="M36 58A44 44 0 0 1 80 14V58Z" fill="#161922"/>`;
+ else if(/Remote/.test(n))s=`<rect x="56" y="14" width="48" height="90" rx="12" fill="${B}"/><circle cx="80" cy="42" r="12" fill="#e53935"/><rect x="68" y="68" width="24" height="8" rx="3" fill="#7f8aa6"/><rect x="68" y="82" width="24" height="8" rx="3" fill="#7f8aa6"/>`;
+ else s=`<rect x="34" y="34" width="92" height="56" rx="6" fill="none" stroke="#161922" stroke-width="7"/><rect x="48" y="46" width="64" height="32" rx="4" fill="#2a2f3b"/><path d="M40 90V108M120 90V108" stroke="${M}" stroke-width="5"/>`;
+ return `<svg viewBox="0 0 160 120" role="img" aria-label="${esc(n)}">${defs}<ellipse cx="80" cy="112" rx="52" ry="5" fill="#0f1b3d" opacity=".12"/>${s}</svg>`;
+}
+function dRange(){
+ if(!S.start)return"";
+ const a=D(S.start),b=D(S.end||S.start),ya=a.getFullYear(),yb=b.getFullYear();
+ if(S.start===(S.end||S.start))return `${a.getDate()} ${MON[a.getMonth()]} ${ya}`;
+ if(a.getMonth()===b.getMonth()&&ya===yb)return `${a.getDate()}-${b.getDate()} ${MON[a.getMonth()]} ${ya}`;
+ return `${a.getDate()} ${MON[a.getMonth()]} ${ya} - ${b.getDate()} ${MON[b.getMonth()]} ${yb}`;
+}
+const dLbl=s=>{if(!s)return"-";const d=D(s);return `${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`};
+const days=()=>S.start&&S.end?Math.round((D(S.end)-D(S.start))/864e5)+1:0;
+const accs=()=>S.acc.map(id=>ACCS.find(a=>a.id===id)).filter(Boolean);
+const perDay=()=>S.cam.price+accs().reduce((s,a)=>s+a.price,0);
+
+function go(v){S.view=v;document.getElementById("mn").classList.remove("on");render();scrollTo(0,0)}
+function tab(t){S.tab=t;S.q="";S.cat="Semua";go("list")}
+function pick(id){S.cam=CAMERAS.find(c=>c.id===id);S.acc=[];S.start=S.end="";go("detail")}
+function filtered(){
+ const L=S.tab==="cam"?CAMERAS:ACCS;
+ return L.filter(i=>(S.cat==="Semua"||i.cat===S.cat)&&i.name.toLowerCase().includes(S.q.toLowerCase()));
+}
+function cards(){
+ const l=filtered(),cam=S.tab==="cam";
+ return l.length?l.map(i=>`<div class="item ${cam?"":"acc"}" ${cam?`onclick="pick(${i.id})"`:`style="cursor:default"`}><div class="th">${art(i,S.tab)}</div><div class="im"><b>${esc(i.name)}</b><span>${esc(i.cat)}</span></div><div class="pr"><b>${rb(i.price)}</b> /hari</div></div>`).join(""):`<div class="empty">Tidak ditemukan.</div>`;
+}
+function chips(){
+ const L=S.tab==="cam"?CAMERAS:ACCS,cats=["Semua",...new Set(L.map(i=>i.cat))];
+ return cats.map(c=>`<button class="chip ${c===S.cat?"on":""}" onclick="S.cat='${c}';render()">${c}</button>`).join("");
+}
+function list(){
+ const cam=S.tab==="cam";
+ const head=cam?`<h1>Katalog kamera</h1><div class="tabs"><button class="on" onclick="tab('cam')">Kamera</button><button onclick="tab('acc')">Aksesoris</button></div>`
+ :`<div class="top"><h1>Katalog aksesoris</h1><div class="seg"><button onclick="tab('cam')">Kamera</button><button class="on">Aksesoris</button></div></div>`;
+ return head+`<div class="search">🔍<input placeholder="${cam?"Cari nama kamera":"Cari tripod, gimbal, mic"}" value="${esc(S.q)}" oninput="S.q=this.value;document.getElementById('g').innerHTML=cards()"></div>
+ <div class="chips ${cam?"":"fill"}">${chips()}</div><div class="grid" id="g">${cards()}</div>`;
+}
+function detail(){
+ const c=S.cam;
+ return `<div class="sheet"><div class="row"><button class="back" onclick="go('list')">← Katalog</button><b style="font-size:19px">${esc(c.name)}</b></div>
+ <div class="hero"><div class="th">${art(c,"cam")}</div><div><div class="${c.ready?"ok":""}">${c.ready?"Tersedia":"Sedang disewa"}</div><div class="price">${rp(c.price)} / hari</div></div></div>
+ <div class="specs"><div>🔲<b>Sensor</b><span>${esc(c.sensor)}</span></div><div>🎥<b>Video</b><span>${esc(c.video)}</span></div><div>🔋<b>Termasuk</b><span>${esc(c.incl)}</span></div></div>
+ <p class="lab">TAMBAH AKSESORIS</p>
+ ${c.acc.map(id=>{const a=ACCS.find(x=>x.id===id);return `<label class="ck"><input type="checkbox" ${S.acc.includes(id)?"checked":""} onchange="tg(${id})"><u>✓</u><span>${esc(a.name)}</span><span style="flex:none;text-align:right">+${rb(a.price)}/hari</span></label>`}).join("")}
+ <button class="btn" ${c.ready?"":"disabled"} onclick="go('date')">${c.ready?"Pilih kamera ini":"Sedang disewa"}</button></div>`;
+}
+function tg(id){S.acc=S.acc.includes(id)?S.acc.filter(x=>x!==id):[...S.acc,id]}
+
+function dateV(){return `<div class="sheet" style="border:0;background:none;padding:0 4px"><div class="row"><button class="back" onclick="go('detail')">← ${esc(S.cam.name)}</button><span class="step">Langkah 3 dari 4</span></div><h2>Pilih tanggal sewa</h2><div id="cal"></div></div>`}
+function calR(){
+ const {y,m}=S,first=(new Date(y,m,1).getDay()+6)%7,n=new Date(y,m+1,0).getDate();
+ let g=["Sn","Si","Rb","Km","Jm","Sb","Mg"].map(d=>`<small>${d}</small>`).join("")+"<span></span>".repeat(first);
+ for(let d=1;d<=n;d++){
+  const s=iso(y,m,d),e=S.end||S.start;
+  const sel=s===S.start||s===S.end,mid=S.start&&e&&s>S.start&&s<e;
+  g+=`<button class="${sel?"sel":mid?"mid":""}" ${s<today?"disabled":""} onclick="pd('${s}')">${d}</button>`;
+ }
+ const n2=days();
+ document.getElementById("cal").innerHTML=`<div class="cal"><div class="row"><button onclick="mv(-1)">‹</button><b>${MONF[m]} ${y}</b><button onclick="mv(1)">›</button></div><div class="dg">${g}</div></div>
+ <div class="fld"><div class="box"><small>Mulai</small><b>${dLbl(S.start)}</b></div><div class="box"><small>Selesai</small><b>${dLbl(S.end)}</b></div></div>
+ <p class="hint">ⓘ Ketuk tanggal mulai, lalu tanggal selesai.</p>
+ <button class="btn" ${n2?"":"disabled"} onclick="go('checkout')">${n2?`Lanjut ke checkout • ${n2} hari`:"Pilih tanggal dulu"}</button>`;
+}
+function mv(k){S.m+=k;if(S.m>11){S.m=0;S.y++}if(S.m<0){S.m=11;S.y--}calR()}
+function pd(s){
+ if(!S.start||S.end){S.start=s;S.end=""}
+ else if(s<S.start){S.start=s}
+ else S.end=s;
+ calR();
+}
+function checkout(){
+ const n=days(),as=accs();
+ return `<div class="sheet"><div class="row"><button class="back" onclick="go('date')">← Tanggal</button><span class="step">Langkah 4 dari 4</span></div><h2>Checkout</h2>
+ <div class="f"><label>Nama lengkap</label><input value="${esc(S.nama)}" oninput="S.nama=this.value" placeholder="Nama sesuai KTP">
+ <label>Nomor WhatsApp</label><input type="tel" value="${esc(S.hp)}" oninput="S.hp=this.value" placeholder="08xx xxxx xxxx">
+ <label>Catatan</label><textarea rows="2" oninput="S.note=this.value" placeholder="Contoh: ambil di toko jam 09.00">${esc(S.note)}</textarea></div>
+ <div class="sum"><div class="ln"><div class="th">${art(S.cam,"cam")}</div><div><b>${esc(S.cam.name)}</b><br><small>${rp(S.cam.price)} × ${n}</small></div><div style="flex:none;text-align:right"><small>Tanggal</small><br><b>${dRange().replace(/ \d{4}$/,"")}</b></div></div>
+ ${as.map(a=>`<div class="ln"><div class="th">${art(a,"acc")}</div><div><b>${esc(a.name)}</b><br><small>${rp(a.price)} × ${n}</small></div></div>`).join("")}
+ <div class="tot"><span>Total</span><b>${rp(n*perDay())}</b></div></div>
+ <div class="err" id="err"></div><button class="btn wa" style="margin-top:4px" onclick="wa()">Checkout via WhatsApp</button></div>`;
+}
+function wa(){
+ if(!S.nama.trim()||!S.hp.trim()){document.getElementById("err").textContent="Nama lengkap dan nomor WhatsApp wajib diisi.";return}
+ const n=days(),as=accs().map(a=>a.name).join(", ")||"-";
+ const t=`Halo admin, saya ingin menyewa.\n\nKamera: ${S.cam.name}\nAksesoris: ${as}\nTanggal: ${dRange()} (${n} hari)\nTotal: ${rp(n*perDay())}\nNama: ${S.nama}\nNo. WhatsApp: ${S.hp}\nCatatan: ${S.note||"-"}\n\nTerima kasih.`;
+ window.open(`https://wa.me/${WA_ADMIN}?text=${encodeURIComponent(t)}`,"_blank");
+}
+function render(){
+ document.getElementById("app").innerHTML={list,detail,date:dateV,checkout}[S.view]();
+ if(S.view==="date")calR();
+}
+render();
+</script>
+</body>
+</html>
